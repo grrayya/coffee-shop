@@ -1,25 +1,23 @@
 from cafe import Cafe
 
-def run_game():
-    game = Cafe()
+def main():
+    shop = Cafe()
     
-    actions = {
-        "1": lambda: print(f"Inventory: {game.inv.stock}"),
-        "2": lambda: game.order_drink("Latte", "Arabica", "Oat"),
-        "3": lambda: game.sell_sweet("Kalo Jam"),
-        "q": exit
-    }
-
-    print("--- Cafe Management System ---")
     while True:
-        print("\nOptions: [1] Status [2] Brew [3] Sell Sweet [q] Quit")
-        cmd = input("Select an option: ").lower()
-        
-        if cmd in actions:
-            actions[cmd]()
-            game.save_state()
-        else:
-            print("Invalid command.")
+        print(f"\nDay {shop.day} | ${shop.revenue}")
+        print("1: Brew | 2: Sell Sweet | 3: Status | 4: End Day | q: Exit")
+        choice = input("> ")
+
+        if choice == "1":
+            shop.order_drink("Latte", "Arabica", "Oat")
+        elif choice == "2":
+            shop.sell_sweet("Kalo Jam")
+        elif choice == "3":
+            print(shop.inv.stock)
+        elif choice == "4":
+            shop.end_day()
+        elif choice == "q":
+            break
 
 if __name__ == "__main__":
-    run_game()
+    main()
