@@ -1,20 +1,29 @@
-from models import Drink, Sweet
-from inventory import CafeInventory
-from machines import BrewingUnit
+import json
+import os
 
 class Cafe:
-    def __init__(self):
+    def __init__(self, data_file='cafe_save.json'):
+        self.data_file = data_file
         self.inv = CafeInventory()
         self.machine = BrewingUnit()
+        self.revenue = 0
+        self.load_state()
 
-    def order_drink(self, name, beans, milk):
-        if self.inv.use_ingredients(20, 50):
-            shot = self.machine.brew()
-            return Drink(name, 5.00, beans, milk)
-        return None
+    def save_state(self):
+        data = {
+            'inventory': self.inv.stock,
+            'ingredients': self.inv.ingredients,
+            'revenue': self.revenue
+        }
+        with open(self.data_file, 'w') as f:
+            json.dump(data, f)
 
-    def sell_sweet(self, name):
-        if self.inv.stock.get(name, 0) > 0:
-            self.inv.stock[name] -= 1
-            return Sweet(name, 2.50)
-        return None
+    def load_state(self):
+        if os.path.exists(self.data_file):
+            with open(self.data_file, 'r') as f:
+                data = json.load(f)
+                self.inv.stock = data['inventory']
+                self.inv.ingredients = data['ingredients']
+                self.revenue = data['revenue']
+
+    # After any order_drink or sell_sweet, call self.save_state()
