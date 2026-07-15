@@ -4,6 +4,9 @@ Sweets t00
 
 cafe management game built with Python, focusing on SOLID principles. 
 
+##why i built it 
+its my favorite type of game, coffe simulation, 
+
 ## Prerequisites
 - Python 3.x installed.
 
