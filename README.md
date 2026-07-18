@@ -1,11 +1,10 @@
 # coffee-shop
-
-Sweets t00
+(sweets too) 
 
 cafe management game built with Python, focusing on SOLID principles. 
 
-##why i built it 
-its my favorite type of game, coffe simulation, 
+## why i built it 
+its my favorite type of game, coffe simulation, another practice using solid. 
 
 ## Prerequisites
 - Python 3.x installed.
